@@ -102,8 +102,8 @@ export function Sidebar({ isOpen, onToggle, isMobile }: SidebarProps) {
             </motion.div>
           </div>
           <div>
-            <h2 className="text-lg font-bold gradient-text">ISA AI</h2>
-            <p className="text-xs text-muted-foreground">Assistente Financeira</p>
+            <h2 className="text-lg font-bold text-white">ISA AI</h2>
+            <p className="text-xs text-gray-300">Assistente Financeira</p>
           </div>
         </motion.div>
       </div>

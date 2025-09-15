@@ -55,8 +55,8 @@ export function DashboardLayout({ children }: DashboardLayoutProps) {
                 </button>
               )}
               <div>
-                <h1 className="text-xl font-semibold gradient-text">ISA AI</h1>
-                <p className="text-sm text-muted-foreground">Assistente Financeira Inteligente</p>
+                <h1 className="text-xl font-bold text-white">ISA AI</h1>
+                <p className="text-sm text-gray-300">Assistente Financeira Inteligente</p>
               </div>
             </div>
             
