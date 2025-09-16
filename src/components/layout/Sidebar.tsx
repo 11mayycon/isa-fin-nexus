@@ -12,9 +12,12 @@ import {
   BarChart3, 
   Settings,
   DollarSign,
-  Sparkles
+  Sparkles,
+  LogOut
 } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { useAuth } from '@/contexts/AuthContext';
+import { Button } from '@/components/ui/button';
 
 interface SidebarProps {
   isOpen: boolean;
@@ -35,6 +38,7 @@ const menuItems = [
 export function Sidebar({ isOpen, onToggle, isMobile }: SidebarProps) {
   const location = useLocation();
   const currentPath = location.pathname;
+  const { user, logout } = useAuth();
 
   const sidebarVariants = {
     open: {
@@ -104,6 +108,12 @@ export function Sidebar({ isOpen, onToggle, isMobile }: SidebarProps) {
           <div>
             <h2 className="text-lg font-bold text-white">ISA AI</h2>
             <p className="text-xs text-gray-300">Assistente Financeira</p>
+            {user && (
+              <div className="mt-2">
+                <p className="text-xs text-white/70">Olá, {user.name}</p>
+                <p className="text-xs text-gray-400">Mat: {user.matricula}</p>
+              </div>
+            )}
           </div>
         </motion.div>
       </div>
@@ -165,17 +175,40 @@ export function Sidebar({ isOpen, onToggle, isMobile }: SidebarProps) {
 
       {/* Footer */}
       <div className="p-4 border-t border-sidebar-border">
-        <div className="flex items-center space-x-3 p-3 bg-success/10 rounded-xl">
-          <div className="w-8 h-8 bg-success rounded-full flex items-center justify-center">
-            <Sparkles className="w-4 h-4 text-white" />
+        <div className="space-y-3">
+          <div className="flex items-center space-x-3 p-3 bg-success/10 rounded-xl">
+            <div className="w-8 h-8 bg-success rounded-full flex items-center justify-center">
+              <Sparkles className="w-4 h-4 text-white" />
+            </div>
+            <div className={cn(
+              "flex-1 transition-all duration-200",
+              (!isMobile && !isOpen) && "opacity-0 w-0 overflow-hidden"
+            )}>
+              <p className="text-sm font-medium text-success">Plano Premium</p>
+              <p className="text-xs text-success/70">Recursos ilimitados</p>
+            </div>
           </div>
-          <div className={cn(
-            "flex-1 transition-all duration-200",
-            (!isMobile && !isOpen) && "opacity-0 w-0 overflow-hidden"
-          )}>
-            <p className="text-sm font-medium text-success">Plano Premium</p>
-            <p className="text-xs text-success/70">Recursos ilimitados</p>
-          </div>
+          
+          <Button
+            onClick={logout}
+            variant="ghost"
+            size="sm"
+            className={cn(
+              "w-full justify-start text-gray-300 hover:text-white hover:bg-white/10",
+              (!isMobile && !isOpen) && "px-3"
+            )}
+          >
+            <LogOut className={cn(
+              "w-4 h-4",
+              (isMobile || isOpen) ? "mr-3" : "mr-0"
+            )} />
+            <span className={cn(
+              "transition-all duration-200",
+              (!isMobile && !isOpen) && "opacity-0 w-0 overflow-hidden"
+            )}>
+              Sair
+            </span>
+          </Button>
         </div>
       </div>
     </motion.aside>
