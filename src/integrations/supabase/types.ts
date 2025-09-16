@@ -85,39 +85,110 @@ export type Database = {
           },
         ]
       }
+      goals: {
+        Row: {
+          created_at: string | null
+          current_amount: number | null
+          description: string | null
+          id: string
+          status: string | null
+          target_amount: number
+          target_date: string | null
+          title: string
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          current_amount?: number | null
+          description?: string | null
+          id?: string
+          status?: string | null
+          target_amount: number
+          target_date?: string | null
+          title: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          current_amount?: number | null
+          description?: string | null
+          id?: string
+          status?: string | null
+          target_amount?: number
+          target_date?: string | null
+          title?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: [
+          {
+            foreignKeyName: "goals_user_id_fkey"
+            columns: ["user_id"]
+            isOneToOne: false
+            referencedRelation: "users"
+            referencedColumns: ["id"]
+          },
+        ]
+      }
       reminders: {
         Row: {
+          amount: number | null
+          category: string | null
           created_at: string | null
           description: string | null
           due_date: string
+          frequency: string | null
           id: string
+          next_reminder_date: string | null
+          recurring: boolean | null
+          recurring_interval: string | null
           reminder_date: string | null
+          reminder_type: string | null
           status: string | null
           title: string
           type: string | null
           user_id: string
+          value: number | null
         }
         Insert: {
+          amount?: number | null
+          category?: string | null
           created_at?: string | null
           description?: string | null
           due_date: string
+          frequency?: string | null
           id?: string
+          next_reminder_date?: string | null
+          recurring?: boolean | null
+          recurring_interval?: string | null
           reminder_date?: string | null
+          reminder_type?: string | null
           status?: string | null
           title: string
           type?: string | null
           user_id: string
+          value?: number | null
         }
         Update: {
+          amount?: number | null
+          category?: string | null
           created_at?: string | null
           description?: string | null
           due_date?: string
+          frequency?: string | null
           id?: string
+          next_reminder_date?: string | null
+          recurring?: boolean | null
+          recurring_interval?: string | null
           reminder_date?: string | null
+          reminder_type?: string | null
           status?: string | null
           title?: string
           type?: string | null
           user_id?: string
+          value?: number | null
         }
         Relationships: [
           {
@@ -184,10 +255,12 @@ export type Database = {
           amount: number
           category: string | null
           created_at: string | null
+          credit_card_id: string | null
           date: string
           description: string | null
           id: string
-          type: string | null
+          payment_method: string | null
+          type: string
           updated_at: string | null
           user_id: string
         }
@@ -195,10 +268,12 @@ export type Database = {
           amount: number
           category?: string | null
           created_at?: string | null
+          credit_card_id?: string | null
           date: string
           description?: string | null
           id?: string
-          type?: string | null
+          payment_method?: string | null
+          type: string
           updated_at?: string | null
           user_id: string
         }
@@ -206,14 +281,23 @@ export type Database = {
           amount?: number
           category?: string | null
           created_at?: string | null
+          credit_card_id?: string | null
           date?: string
           description?: string | null
           id?: string
-          type?: string | null
+          payment_method?: string | null
+          type?: string
           updated_at?: string | null
           user_id?: string
         }
         Relationships: [
+          {
+            foreignKeyName: "transactions_credit_card_id_fkey"
+            columns: ["credit_card_id"]
+            isOneToOne: false
+            referencedRelation: "credit_cards"
+            referencedColumns: ["id"]
+          },
           {
             foreignKeyName: "transactions_user_id_fkey"
             columns: ["user_id"]
@@ -225,28 +309,46 @@ export type Database = {
       }
       users: {
         Row: {
+          balance: number | null
           created_at: string | null
           email: string | null
           id: string
           matricula: string
           name: string
           phone: string
+          plan_type: string | null
+          stripe_customer_id: string | null
+          subscription_status: string | null
+          trial_ends_at: string | null
+          updated_at: string | null
         }
         Insert: {
+          balance?: number | null
           created_at?: string | null
           email?: string | null
           id?: string
           matricula: string
           name: string
           phone: string
+          plan_type?: string | null
+          stripe_customer_id?: string | null
+          subscription_status?: string | null
+          trial_ends_at?: string | null
+          updated_at?: string | null
         }
         Update: {
+          balance?: number | null
           created_at?: string | null
           email?: string | null
           id?: string
           matricula?: string
           name?: string
           phone?: string
+          plan_type?: string | null
+          stripe_customer_id?: string | null
+          subscription_status?: string | null
+          trial_ends_at?: string | null
+          updated_at?: string | null
         }
         Relationships: []
       }
